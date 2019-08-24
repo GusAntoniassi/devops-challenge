@@ -1,0 +1,19 @@
+- name: Adicionar a chave do Docker
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Adicionar repositório do Docker no apt
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu bionic stable
+    state: present
+
+- name: Atualizar apt e instalar o Docker
+  apt: 
+    update_cache: yes 
+    name: docker-ce 
+    state: latest
+
+- name: Instalar o módulo do Docker para o Python 
+  pip:
+    name: docker

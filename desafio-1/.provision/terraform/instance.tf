@@ -69,6 +69,6 @@ resource "aws_instance" "desafio_1" {
   key_name = "${aws_key_pair.public_key.key_name}"
 
   provisioner "local-exec" {
-    command = "sleep 120; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u ubuntu -i '${aws_instance.desafio_1.public_ip},' master.yml"
+    command = "sleep 120; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u ubuntu -i '${aws_instance.desafio_1.public_ip},' ../ansible/master.yml"
   }
 }

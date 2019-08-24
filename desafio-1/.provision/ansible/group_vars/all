@@ -1,0 +1,6 @@
+---
+application_name: desafio_1
+
+# Variáveis do container Docker
+docker_image_name: "{{ application_name }}"
+docker_image_tag: latest

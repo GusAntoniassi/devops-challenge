@@ -1,0 +1,28 @@
+- name: Copiar código-fonte da aplicação para o servidor
+  copy:
+    src: "{{ item }}"
+    dest: /home/ubuntu/app/
+    owner: ubuntu
+    group: ubuntu
+  with_items:
+    - "../../Dockerfile"
+    - "../../main.py"
+    - "../../requirements.txt"
+
+- name: Build da imagem do projeto com Docker
+  docker_image:
+    build:
+      path: /home/ubuntu/app
+      pull: no
+    name: "{{ docker_image_name }}"
+    tag: "{{ docker_image_tag }}"
+    push: no
+    source: build
+
+- name: Criar container da aplicação
+  docker_container:
+    image: "{{ docker_image_name }}:{{ docker_image_tag }}"
+    name: "{{ application_name }}"
+    state: started
+    ports: 
+      - "80:5000"

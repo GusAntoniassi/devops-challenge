@@ -1,8 +1,9 @@
 ## Executar a aplicação
-Aplicação sobe por default na porta 5000
+**Requisitos necessários: Docker**
+
 ```sh
-$ pip install -r requirements.txt
-$ python main.py
+$ docker build -t desafio-1:latest .
+$ docker run -d -p 5000:5000 desafio-1:latest
 ```
 
 ### Testar a aplicação

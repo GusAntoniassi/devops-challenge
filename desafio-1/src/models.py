@@ -1,7 +1,6 @@
 from src.database import db
 from passlib.hash import argon2 as hasher
 
-# https://codeburst.io/jwt-authorization-in-flask-c63c1acf4eeb
 class UserModel(db.Model):
     __tablename__ = 'users'
     __table_args__ = {'extend_existing': True} 
@@ -22,10 +21,10 @@ class UserModel(db.Model):
     def returnAll(cls):
         def to_json(x):
             return {
-                'username': x.username,
-                'password': x.password
+                'username': x.username
             }
-        return (map(lambda x: to_json(x), UserModel.query.all()))
+            
+        return map(to_json, UserModel.query.all())
 
     @staticmethod
     def generateHash(password):

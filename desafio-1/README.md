@@ -7,21 +7,57 @@ $ docker run -d -p 80:5000 desafio-1:latest
 ```
 
 ## Deploy
-[Clique aqui](resolucao.md).
+[Clique aqui para acessar a documentação](resolucao.md).
 
-### Testar a aplicação
-Teste GET
-```sh
-$ curl http://localhost:5000/characters
-```
-Teste POST
+## Testar a aplicação
+
+Cadastrar um usuário
+
 ```sh
 $ curl -X POST -H "Content-Type: application/json" -d '{
+  "username": "gus",
+  "password": "123456"
+}' http://localhost:5000/users
+```
+
+Login
+```sh
+$ curl -X POST -H "Content-Type: application/json" -d '{
+  "username": "gus",
+  "password": "123456"
+}' http://localhost:5000/login
+```
+
+Listar personagens
+```sh
+$ curl -H "Authorization: Bearer <Token JWT aqui>" http://localhost:5000/characters
+```
+
+Cadastrar personagem
+```sh
+$ curl -X POST -H "Authorization: Bearer <Token JWT aqui>" -H "Content-Type: application/json" -d '{
   "Race": "Hobbit",
   "age": "589",
   "name": "Gollum"
 }' http://localhost:5000/characters
 ```
+
+Editar personagem
+```sh
+$ curl -X PUT -H "Authorization: Bearer <Token JWT aqui>" -H "Content-Type: application/json" -d '{
+  "Race": "Hobbit",
+  "age": "589",
+  "name": "Gollum"
+}' http://localhost:5000/characters/1
+```
+
+Excluir personagem
+```sh
+$ curl -X DELETE -H "Authorization: Bearer <Token JWT aqui>" http://localhost:5000/characters/1
+```
+
+## Collection do Postman
+[![Executar no Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/91a89b865e6c65b7242f#?env%5BDesafio%201%5D=W3sia2V5IjoiYXBpX3VybCIsInZhbHVlIjoiaHR0cDovL2xvY2FsaG9zdDo1MDAwIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJhcGlfdXNlcm5hbWUiLCJ2YWx1ZSI6Imd1cyIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiYXBpX3Bhc3N3b3JkIiwidmFsdWUiOiIxMjM0NTYiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6InRva2VuIiwidmFsdWUiOiJleUpoYkdjaU9pSklVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKcWRHa2lPaUptWWpZeE1qRTBaQzFrTURWaUxUUmpNREl0T1dGaVlTMWlaR0U1TmpRMVlXUXpZaklpTENKbGVIQWlPakUxTmpZM05EQTVPVFlzSW1aeVpYTm9JanBtWVd4elpTd2lhV0YwSWpveE5UWTJOelF3TURrMkxDSjBlWEJsSWpvaVlXTmpaWE56SWl3aWJtSm1Jam94TlRZMk56UXdNRGsyTENKcFpHVnVkR2wwZVNJNkltZDFjeUo5LkQzYTFRT09SalF2cVJzeS1pS0ZGeG5MTi1FOHRmemZWVFduY1JlMUZXZ28iLCJlbmFibGVkIjp0cnVlfV0=)
 
 ## Referências
 - Docker + Flask: https://medium.com/@mtngt/docker-flask-a-simple-tutorial-bbcb2f4110b5

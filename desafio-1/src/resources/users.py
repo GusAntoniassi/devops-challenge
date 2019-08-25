@@ -1,6 +1,7 @@
 from flask import jsonify, request, current_app as app
 from src.models import UserModel
 from sqlalchemy import exc as SQLException
+from flask_jwt_extended import create_access_token
 
 @app.route('/login', methods=['POST'])
 def login():  
@@ -11,14 +12,17 @@ def login():
   if not currentUser:
     return jsonify({'message': 'User {} doesn\'t exist'.format(data['username'])})
     
-  if UserModel.verifyHash(data['password'], currentUser.password):
-    return jsonify({'message': 'Logged in as {}'.format(currentUser.username)})
-  else:
+  if not UserModel.verifyHash(data['password'], currentUser.password):
     return jsonify({'message': 'Wrong credentials'})
 
-@app.route('/logout', methods=['POST'])
-def logout():  
-  return jsonify({'message': 'User logout'})
+  accessToken = create_access_token(identity = data['username'])
+
+  return jsonify(
+    {
+      'message': 'Logged in as {}'.format(currentUser.username),
+      'token': accessToken,
+    }
+  )
 
 @app.route('/users')
 def get_users():  

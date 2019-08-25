@@ -2,13 +2,17 @@
 # -*- coding: utf-8 -*-
 
 from flask import Flask, jsonify, request
+from flask_jwt_extended import JWTManager
 from src.database import db
 
 app = Flask(__name__)
+jwt = JWTManager(app)
   
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = 'thunderbolt-and-lightning-very-very-frightening-me'
+
+app.config['JWT_SECRET_KEY'] = 'thunderbolt-and-lightning'
+app.config['SECRET_KEY'] = 'very-very-frightening-me'
 
 with app.app_context(): 
   import src.models, src.resources

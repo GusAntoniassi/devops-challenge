@@ -1,6 +1,33 @@
 
-# Created by https://www.gitignore.io/api/git,visualstudiocode
-# Edit at https://www.gitignore.io/?templates=git,visualstudiocode
+# Created by https://www.gitignore.io/api/git,flask
+# Edit at https://www.gitignore.io/?templates=git,flask
+
+### Flask ###
+instance/*
+!instance/.gitignore
+.webassets-cache
+
+### Flask.Python Stack ###
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Flask stuff:
+instance/
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
 
 ### Git ###
 # Created by git for backups. To disable backups in Git:
@@ -17,15 +44,7 @@
 *_LOCAL_*.txt
 *_REMOTE_*.txt
 
-### VisualStudioCode ###
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
+# End of https://www.gitignore.io/api/git,flask
 
-### VisualStudioCode Patch ###
-# Ignore all local history of files
-.history
-
-# End of https://www.gitignore.io/api/git,visualstudiocode
+# Ignorar o banco de dados
+app.db

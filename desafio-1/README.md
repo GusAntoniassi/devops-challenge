@@ -31,3 +31,4 @@ $ curl -X POST -H "Content-Type: application/json" -d '{
 - Integrando Ansible com Terraform: https://getintodevops.com/blog/using-ansible-with-terraform
 - Instalação do Docker no Ansible: https://www.digitalocean.com/community/tutorials/how-to-use-ansible-to-install-and-set-up-docker-on-ubuntu-18-04
 - Organização do projeto Ansible: https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html
+- Autenticação JWT e CRUD com SQLite no Flask: https://codeburst.io/jwt-authorization-in-flask-c63c1acf4eeb

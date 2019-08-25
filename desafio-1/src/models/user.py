@@ -10,16 +10,16 @@ class UserModel(db.Model):
     username = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
 
-    def saveToDb(self):
+    def save_to_db(self):
         db.session.add(self)
         db.session.commit()
 
     @classmethod
-    def findByUsername(cls, username):
+    def find_by_username(cls, username):
         return cls.query.filter_by(username=username).first()
 
     @classmethod
-    def returnAll(cls):
+    def return_all(cls):
         def to_json(x):
             return {
                 'username': x.username
@@ -28,7 +28,7 @@ class UserModel(db.Model):
         return map(to_json, UserModel.query.all())
 
     @staticmethod
-    def generateHash(password):
+    def generate_hash(password):
         return hasher.hash(password)
 
     @staticmethod

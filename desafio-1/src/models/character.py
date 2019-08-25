@@ -10,7 +10,7 @@ class CharacterModel(db.Model):
     race = db.Column(db.String(120), nullable=False)
     age = db.Column(db.String(120), nullable=False)
 
-    def saveToDb(self):
+    def save_to_db(self):
         db.session.add(self)
         db.session.commit()
 
@@ -26,13 +26,13 @@ class CharacterModel(db.Model):
         }
 
     @classmethod
-    def findById(cls, id):
+    def find_by_id(cls, id):
         return cls.to_json(
             cls.query.filter_by(id=id).first()
         )
 
     @classmethod
-    def findByName(cls, name):
+    def find_by_name(cls, name):
         search = "{}%".format(name)
         return map(
             cls.to_json,
@@ -40,7 +40,7 @@ class CharacterModel(db.Model):
         )
 
     @classmethod
-    def returnAll(cls):
+    def return_all(cls):
         return map(cls.to_json, cls.query.all())
 
     @classmethod

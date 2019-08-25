@@ -1,4 +1,4 @@
-from src.models import UserModel
+from src.models.user import UserModel
 
 from flask import jsonify, request, current_app as app
 from sqlalchemy import exc as SQLException

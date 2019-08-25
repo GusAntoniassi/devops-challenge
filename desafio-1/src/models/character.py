@@ -1,39 +1,4 @@
 from src.database import db
-from passlib.hash import argon2 as hasher
-
-
-class UserModel(db.Model):
-    __tablename__ = 'users'
-    __table_args__ = {'extend_existing': True}
-
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(120), nullable=False)
-
-    def saveToDb(self):
-        db.session.add(self)
-        db.session.commit()
-
-    @classmethod
-    def findByUsername(cls, username):
-        return cls.query.filter_by(username=username).first()
-
-    @classmethod
-    def returnAll(cls):
-        def to_json(x):
-            return {
-                'username': x.username
-            }
-
-        return map(to_json, UserModel.query.all())
-
-    @staticmethod
-    def generateHash(password):
-        return hasher.hash(password)
-
-    @staticmethod
-    def verifyHash(password, hash):
-        return hasher.verify(password, hash)
 
 
 class CharacterModel(db.Model):
@@ -53,7 +18,7 @@ class CharacterModel(db.Model):
     def to_json(cls, x):
         if not x:
             return
-        
+
         return {
             'name': x.name,
             'race': x.race,
@@ -70,7 +35,7 @@ class CharacterModel(db.Model):
     def findByName(cls, name):
         search = "{}%".format(name)
         return map(
-            cls.to_json, 
+            cls.to_json,
             cls.query.filter(cls.name.ilike(search)).all()
         )
 
@@ -96,5 +61,5 @@ class CharacterModel(db.Model):
 
         if not character_query.first():
             raise LookupError
-        
+
         db.session.commit()

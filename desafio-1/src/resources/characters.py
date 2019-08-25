@@ -1,4 +1,4 @@
-from src.models import CharacterModel
+from src.models.character import CharacterModel
 
 from flask import jsonify, request, current_app as app
 from sqlalchemy import exc as SQLException

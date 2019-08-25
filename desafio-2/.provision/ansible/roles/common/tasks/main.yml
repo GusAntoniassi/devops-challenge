@@ -1,0 +1,10 @@
+- name: Instalar pacotes do sistema necessários para a aplicação
+  apt: 
+    name: "{{ item }}" 
+    state: latest 
+    update_cache: yes
+  loop: [ 
+    'apt-transport-https', 
+    'ca-certificates', 
+    'software-properties-common'
+  ]

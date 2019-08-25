@@ -1,0 +1,20 @@
+- name: Instalar NGINX
+  apt:
+    name: "nginx"
+    state: latest
+
+- name: Adicionar configurações default
+  template:
+    src: default.conf.j2
+    dest: /etc/nginx/sites-available/default
+
+- name: Garantir que o serviço esteja iniciado
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+
+- name: Garantir que o serviço seja recarregado pra aplicar as configurações
+  service:
+    name: nginx
+    state: reloaded

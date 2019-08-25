@@ -33,10 +33,20 @@ Listar personagens
 $ curl -H "Authorization: Bearer <Token JWT aqui>" http://localhost:5000/characters
 ```
 
+Buscar personagem por ID
+```sh
+$ curl -H "Authorization: Bearer <Token JWT aqui>" http://localhost:5000/characters/1
+```
+
+Buscar personagem por nome
+```sh
+$ curl -H "Authorization: Bearer <Token JWT aqui>" http://localhost:5000/characters/ara
+```
+
 Cadastrar personagem
 ```sh
 $ curl -X POST -H "Authorization: Bearer <Token JWT aqui>" -H "Content-Type: application/json" -d '{
-  "Race": "Hobbit",
+  "race": "Hobbit",
   "age": "589",
   "name": "Gollum"
 }' http://localhost:5000/characters
@@ -45,7 +55,7 @@ $ curl -X POST -H "Authorization: Bearer <Token JWT aqui>" -H "Content-Type: app
 Editar personagem
 ```sh
 $ curl -X PUT -H "Authorization: Bearer <Token JWT aqui>" -H "Content-Type: application/json" -d '{
-  "Race": "Hobbit",
+  "race": "Hobbit",
   "age": "589",
   "name": "Gollum"
 }' http://localhost:5000/characters/1

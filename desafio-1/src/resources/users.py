@@ -1,5 +1,6 @@
-from flask import jsonify, request, current_app as app
 from src.models import UserModel
+
+from flask import jsonify, request, current_app as app
 from sqlalchemy import exc as SQLException
 from flask_jwt_extended import create_access_token
 
@@ -7,10 +8,10 @@ from flask_jwt_extended import create_access_token
 def login():  
   data = request.get_json()
 
-  currentUser = UserModel.findByUsername(data['username']);
+  currentUser = UserModel.findByUsername(data['username'])
 
   if not currentUser:
-    return jsonify({'message': 'User {} doesn\'t exist'.format(data['username'])})
+    return jsonify({'message': 'User {} doesn\'t exist'.format(data['username'])}), 404
     
   if not UserModel.verifyHash(data['password'], currentUser.password):
     return jsonify({'message': 'Wrong credentials'})

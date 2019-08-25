@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  php:
+    build:
+      context: ./.docker/php
+    volumes:
+      - ./wordpress:/var/www/html
+      - ./.docker/php/conf.d:/usr/local/etc/php/conf.d/autoload
+    links:
+      - db
+  nginx:
+    image: nginx:1.15
+    ports: 
+      - "${PORTA_NGINX-80}:80"
+    volumes:
+      - ./wordpress:/var/www/html
+      - ./.docker/nginx/conf.d/:/etc/nginx/conf.d/
+    links:
+      - php
+  db:
+    image: mysql:5.7
+    volumes:
+      - data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: galileo
+      MYSQL_DATABASE: galileo
+      MYSQL_USER: galileo
+      MYSQL_PASSWORD: figaro
+volumes:
+  data:

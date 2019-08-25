@@ -4,3 +4,6 @@ application_name: desafio_1
 # Variáveis do container Docker
 docker_image_name: "{{ application_name }}"
 docker_image_tag: latest
+
+# Utilizar o Python 3 nos hosts
+ansible_python_interpreter: /usr/bin/python3

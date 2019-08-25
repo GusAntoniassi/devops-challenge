@@ -7,17 +7,15 @@
   with_items:
     - "../../Dockerfile"
     - "../../main.py"
+    - "../../src"
     - "../../requirements.txt"
 
 - name: Build da imagem do projeto com Docker
   docker_image:
-    build:
-      path: /home/ubuntu/app
-      pull: no
+    path: /home/ubuntu/app
     name: "{{ docker_image_name }}"
     tag: "{{ docker_image_tag }}"
     push: no
-    source: build
 
 - name: Criar container da aplicação
   docker_container:

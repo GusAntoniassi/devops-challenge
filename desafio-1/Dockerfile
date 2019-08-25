@@ -1,6 +1,7 @@
 FROM python:2.7
 
 COPY ["Dockerfile", "main.py", "requirements.txt", "/app/"]
+COPY ["src/", "/app/src/"]
 
 WORKDIR /app
 

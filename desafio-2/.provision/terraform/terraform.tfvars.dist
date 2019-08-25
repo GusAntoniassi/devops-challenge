@@ -1,0 +1,3 @@
+public_key = "~/.ssh/id_rsa.pub"
+aws_credentials_file = "~/.aws/credentials"
+aws_credentials_profile = "giropops"

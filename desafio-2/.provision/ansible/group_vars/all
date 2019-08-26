@@ -1,5 +1,6 @@
 ---
 application_name: desafio_2
+server_domain_name: desafio-2.dev
 
 # Utilizar o Python 3 nos hosts
 ansible_python_interpreter: /usr/bin/python3

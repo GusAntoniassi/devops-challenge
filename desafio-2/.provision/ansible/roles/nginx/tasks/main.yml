@@ -3,10 +3,48 @@
     name: "nginx"
     state: latest
 
-- name: Adicionar configurações default
+- name: Criar grupo NGINX
+  group:
+    name: nginx
+    state: present
+
+- name: Criar usuário NGINX
+  user:
+    name: nginx
+    group: nginx
+
+- name: Adicionar usuário ubuntu ao grupo NGINX
+  user:
+    name: ubuntu
+    groups: nginx
+    append: yes
+
+- name: Criar pastas da aplicação e de logs
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0655'
+    owner: nginx
+    group: nginx
+  with_items:
+    - "/var/www/{{ server_domain_name }}"
+    - "/var/log/nginx/{{ server_domain_name }}"
+
+- name: Adicionar configurações do NGINX para o projeto
   template:
     src: default.conf.j2
-    dest: /etc/nginx/sites-available/default
+    dest: /etc/nginx/sites-available/{{ server_domain_name }}
+
+- name: Desabilitar site default NGINX
+  file:
+    state: absent
+    path: "/etc/nginx/sites-enabled/default"
+
+- name: Habilitar site do projeto
+  file:
+    src: "/etc/nginx/sites-available/{{ server_domain_name }}"
+    dest: "/etc/nginx/sites-enabled/{{ server_domain_name }}"
+    state: link
 
 - name: Garantir que o serviço esteja iniciado
   service:

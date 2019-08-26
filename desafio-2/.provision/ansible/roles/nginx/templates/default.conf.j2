@@ -1,7 +1,7 @@
 server {
     listen 80;
     server_name {{ server_domain_name }};
-    root /var/www/html; 
+    root /var/www/{{ server_domain_name }}; 
 
     index index.php index.html;
     access_log /var/log/nginx/{{ server_domain_name }}/access.log;
@@ -12,16 +12,9 @@ server {
         try_files $uri $uri/ /index.php$is_args$args;
     }
 
-    # Requisições do PHP enviar ao socket do FPM no container 'php', porta 9000
     location ~ \.php$ {
-        try_files $uri =404;
-        fastcgi_split_path_info ^(.+\.php)(/.+)$;
-        fastcgi_pass localhost:9000;
-        fastcgi_index index.php;
-        include fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        fastcgi_param PATH_INFO $fastcgi_path_info;
-        fastcgi_read_timeout 3600s;
+            include snippets/fastcgi-php.conf;
+            fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
     }
 
     # Negar acesso aos arquivos do apache (ex. .htaccess) se houver algum	

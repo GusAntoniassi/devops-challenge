@@ -4,5 +4,5 @@
   roles: 
     - common
     - nginx
-    # - docker
+    - php-fpm
     # - application

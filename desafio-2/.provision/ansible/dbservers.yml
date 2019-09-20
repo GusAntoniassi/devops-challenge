@@ -1,0 +1,6 @@
+---
+- hosts: tag_Type_dbserver # Utiliza a tag "Type" para pegar todos os servidores do grupo webserver
+  become: true
+  roles: 
+    - common
+    - mysql

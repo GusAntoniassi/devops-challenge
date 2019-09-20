@@ -3,7 +3,18 @@
     src: "../../wordpress/"
     dest: /var/www/{{ server_domain_name }}
 
+- name: Alterar permissões
+  file:
+    path: /var/www/{{ server_domain_name }}
+    recurse: yes
+    state: directory
+    owner: nginx
+    group: nginx
+
 - name: Copia o arquivo de configuração do Wordpress
   template:
+    owner: nginx
+    group: nginx
     src: wp-config.php.j2
     dest: /var/www/{{ server_domain_name }}/wp-config.php
+    force: no

@@ -69,7 +69,15 @@ resource "aws_instance" "desafio_2_web" {
 
   key_name = "${aws_key_pair.public_key.key_name}"
 
-  # provisioner "local-exec" {
-  #   command = "sleep 120; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u ubuntu -i '${aws_instance.desafio_2_web.public_ip},' ../ansible/master.yml"
-  # }
+  provisioner "local-exec" {
+    command = <<EOT
+      sleep 120; \
+      cd ../ansible && \
+      AWS_PROFILE='${var.aws_credentials_profile}' \
+      ansible-playbook \
+        -u ubuntu \
+        -i inventory/ec2.py \
+        webservers.yml
+EOT
+  }
 }

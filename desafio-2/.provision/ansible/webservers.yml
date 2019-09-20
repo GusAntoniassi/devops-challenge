@@ -1,0 +1,8 @@
+---
+- hosts: tag_Type_webserver # Utiliza a tag "Type" para pegar todos os servidores do grupo webserver
+  become: true
+  roles: 
+    - common
+    - nginx
+    - php-fpm
+    - application

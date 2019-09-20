@@ -1,8 +1,0 @@
----
-- hosts: all
-  become: true
-  roles: 
-    - common
-    - nginx
-    - php-fpm
-    - application

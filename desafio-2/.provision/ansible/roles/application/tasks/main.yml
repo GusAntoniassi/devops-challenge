@@ -1,26 +1,9 @@
 - name: Copiar código-fonte da aplicação para o servidor
-  copy:
-    src: "{{ item }}"
-    dest: /home/ubuntu/app/
-    owner: ubuntu
-    group: ubuntu
-  with_items:
-    - "../../Dockerfile"
-    - "../../main.py"
-    - "../../src"
-    - "../../requirements.txt"
+  synchronize:
+    src: "../../wordpress/"
+    dest: /var/www/{{ server_domain_name }}
 
-- name: Build da imagem do projeto com Docker
-  docker_image:
-    path: /home/ubuntu/app
-    name: "{{ docker_image_name }}"
-    tag: "{{ docker_image_tag }}"
-    push: no
-
-- name: Criar container da aplicação
-  docker_container:
-    image: "{{ docker_image_name }}:{{ docker_image_tag }}"
-    name: "{{ application_name }}"
-    state: started
-    ports: 
-      - "80:5000"
+- name: Copia o arquivo de configuração do Wordpress
+  template:
+    src: wp-config.php.j2
+    dest: /var/www/{{ server_domain_name }}/wp-config.php

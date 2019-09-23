@@ -33,6 +33,7 @@ resource "aws_instance" "desafio_2_db" {
       cd ../ansible && \
       AWS_PROFILE='${var.aws_credentials_profile}' \
       ansible-playbook \
+        --vault-password-file .vault_pass \
         -u ubuntu \
         -i inventory/ec2.py \
         dbservers.yml
@@ -64,6 +65,7 @@ resource "aws_instance" "desafio_2_web" {
       cd ../ansible && \
       AWS_PROFILE='${var.aws_credentials_profile}' \
       ansible-playbook \
+        --vault-password-file .vault_pass \
         -u ubuntu \
         -i inventory/ec2.py \
         --extra-vars "db_address=${aws_instance.desafio_2_db.private_dns}" \

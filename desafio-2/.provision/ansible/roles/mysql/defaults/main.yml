@@ -11,8 +11,8 @@ mysql_root_username: root
 mysql_root_password: root
 
 # Set this to `true` to forcibly update the root password.
-mysql_root_password_update: false
-mysql_user_password_update: false
+mysql_root_password_update: true
+mysql_user_password_update: true
 
 mysql_enabled_on_startup: true
 
@@ -105,16 +105,16 @@ mysql_config_include_files: []
 
 # Databases.
 mysql_databases: 
-  - name: wordpress
+  - name: "{{ db_name }}"
     collation: utf8_general_ci
     encoding: utf8
     replicate: 1
 
 # Users.
 mysql_users: 
-  - name: wordpress
+  - name: "{{ db_user }}"
     host: "192.168.%.%"
-    password: secret
+    password: "{{ db_pass }}"
     priv: wordpress.*:ALL
 
 # Replication settings (replication is only enabled if master/user have values).

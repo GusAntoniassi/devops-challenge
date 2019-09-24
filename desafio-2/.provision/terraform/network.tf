@@ -26,7 +26,7 @@ resource "aws_route_table" "desafio_2_rt" {
 
 resource "aws_route_table_association" "desafio_2_rta_frontend" {
     route_table_id = "${aws_route_table.desafio_2_rt.id}"
-    subnet_id = "${aws_subnet.frontend.id}"
+    subnet_id = "${aws_subnet.frontend_a.id}"
 }
 
 resource "aws_route_table_association" "desafio_2_rta_backend" {

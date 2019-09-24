@@ -44,7 +44,7 @@ EOT
 resource "aws_instance" "desafio_2_web" {
   ami           = "${var.ami}"
   instance_type = "${var.server_instance_type}"
-  subnet_id     = "${aws_subnet.frontend.id}"
+  subnet_id     = "${aws_subnet.frontend_a.id}"
 
   tags = {
     Name = "Desafio 2 - Web"
